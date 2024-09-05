@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 
-class ReusableText extends StatelessWidget {
+class HeaderText extends StatelessWidget {
   final String text;
   final double fontSize; // Adjust this based on your needs
   final Color color;
 
-  const ReusableText({
+  const HeaderText({
     Key? key,
-    required this.text,
-    this.fontSize = 0.0, // Default font size
-    this.color = Colors.blue, // Default color
+    required this.text, // Correct parameter passing
+    this.fontSize = 24.0, // Default font size
+    this.color = Colors.white, // Default color
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     return Text(
       text,
       style: TextStyle(
-        fontSize: screenWidth * 0.09, // 9% of the screen width
-
+        fontSize: fontSize, // Use the provided font size
         color: color,
       ),
     );

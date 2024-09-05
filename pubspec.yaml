@@ -10,6 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.6
+  flutter_local_notifications: ^5.0.0+3
+  shared_preferences: ^2.0.9
+  flutter_svg: ^2.0.10+1
+  appwrite: ^13.0.0
+
+
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +28,5 @@ flutter:
   assets:
    - Assets/Images/
    - Assets/Images/LoginAndRegister/
+   - Assets/Images/HomeOwnerPanel/
+

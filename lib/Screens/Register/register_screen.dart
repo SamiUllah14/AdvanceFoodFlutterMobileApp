@@ -52,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ReusableText(text: "Register"),
+                    HeaderText(text: "Register"),
                     SizedBox(
                         height: screenHeight * 0.01), // 2% of the screen height
                     BodyText(

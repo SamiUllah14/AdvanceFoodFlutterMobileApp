@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ReusableText(text: "Login"),
+                    HeaderText(text: "Login"),
                     SizedBox(
                         height: screenHeight * 0.01), // 2% of the screen height
                     BodyText(
