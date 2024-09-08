@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:owner_project_app/Widgets/ReusableWidgets/Global/body_text.dart';
 
 class PinLockWidget extends StatelessWidget {
@@ -24,18 +23,18 @@ class PinLockWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.lock),
+                      const Icon(Icons.lock),
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
-                      BodyText(text: "Enter Your Password"),
+                      const BodyText(text: "Enter Your Password"),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: screenHeight * 0.02,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DotsForPassword(),
@@ -50,46 +49,46 @@ class PinLockWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: Text("1")),
-                    SizedBox(width: 10), // Add space between buttons
-                    ElevatedButton(onPressed: () {}, child: Text("2")),
-                    SizedBox(width: 10), // Add space between buttons
-                    ElevatedButton(onPressed: () {}, child: Text("3")),
+                    ElevatedButton(onPressed: () {}, child: const Text("1")),
+                    const SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("2")),
+                    const SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("3")),
                   ],
                 ),
-                SizedBox(height: 10), // Add space between rows
+                const SizedBox(height: 10), // Add space between rows
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: Text("4")),
-                    SizedBox(width: 10), // Add space between buttons
-                    ElevatedButton(onPressed: () {}, child: Text("5")),
-                    SizedBox(width: 10), // Add space between buttons
-                    ElevatedButton(onPressed: () {}, child: Text("6")),
+                    ElevatedButton(onPressed: () {}, child: const Text("4")),
+                    const SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("5")),
+                    const SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("6")),
                   ],
                 ),
-                SizedBox(height: 10), // Add space between rows
+                const SizedBox(height: 10), // Add space between rows
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: Text("7")),
-                    SizedBox(width: 10), // Add space between buttons
-                    ElevatedButton(onPressed: () {}, child: Text("8")),
-                    SizedBox(width: 10), // Add space between buttons
-                    ElevatedButton(onPressed: () {}, child: Text("9")),
+                    ElevatedButton(onPressed: () {}, child: const Text("7")),
+                    const SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("8")),
+                    const SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("9")),
                   ],
                 ),
-                SizedBox(height: 10), // Add space between rows
+                const SizedBox(height: 10), // Add space between rows
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: Text("0")),
-                    SizedBox(width: 10), // Add space between buttons
+                    ElevatedButton(onPressed: () {}, child: const Text("0")),
+                    const SizedBox(width: 10), // Add space between buttons
                     ElevatedButton(
-                        onPressed: () {}, child: Icon(Icons.arrow_back)),
+                        onPressed: () {}, child: const Icon(Icons.arrow_back)),
                   ],
                 ),
-                SizedBox(height: 50), // Add space between rows
+                const SizedBox(height: 50), // Add space between rows
                 GestureDetector(
                   onTap: () {
                     // Handle tap event
@@ -97,8 +96,8 @@ class PinLockWidget extends StatelessWidget {
                     print("Contact the programmer tapped");
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: const Text(
                       "Forgot your password?",
                       style: TextStyle(
                         color: Colors.blue,

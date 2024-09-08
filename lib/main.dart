@@ -3,23 +3,18 @@ import 'package:get/get.dart';
 import 'package:owner_project_app/Screens/Chat/ChatEmployeeContacts/chat_employee_contact.dart';
 import 'package:owner_project_app/Screens/Home/home_screen.dart';
 
-import 'Services/appwrite_service.dart';
-
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures proper initialization
-  AppwriteService.init(); // Initialize Appwrite client
   runApp(MainApp());
 }
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      themeMode:
-          ThemeMode.system, // Automatically switch between light and dark modes
+      themeMode: ThemeMode.system, // Automatically switch between light and dark modes
       home: MainPage(), // The main page with BottomNavigationBar
     );
   }
@@ -49,8 +44,7 @@ class MainPage extends StatelessWidget {
         Get.put(MainController()); // Initialize controller
 
     return Scaffold(
-      body: Obx(() => controller
-          .pages[controller.selectedIndex.value]), // Observe the selected index
+      body: Obx(() => controller.pages[controller.selectedIndex.value]), // Observe the selected index
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changePage, // Change page on tap
