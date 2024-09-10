@@ -6,6 +6,7 @@ class ManagerDetailScreen extends StatelessWidget {
   final String managerEmail;
   final String managerPassword;
 
+  // ignore: use_super_parameters
   const ManagerDetailScreen({
     Key? key,
     required this.managerName,
@@ -25,10 +26,10 @@ class ManagerDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Name: $managerName', style: TextStyle(fontSize: 18)),
-            Text('Role: $managerRole', style: TextStyle(fontSize: 18)),
-            Text('Email: $managerEmail', style: TextStyle(fontSize: 18)),
-            Text('Password: $managerPassword', style: TextStyle(fontSize: 18)),
+            Text('Name: $managerName', style: const TextStyle(fontSize: 18)),
+            Text('Role: $managerRole', style: const TextStyle(fontSize: 18)),
+            Text('Email: $managerEmail', style: const TextStyle(fontSize: 18)),
+            Text('Password: $managerPassword', style: const TextStyle(fontSize: 18)),
           ],
         ),
       ),

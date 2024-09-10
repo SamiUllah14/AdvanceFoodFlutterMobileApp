@@ -6,9 +6,6 @@ class ProfileList extends StatelessWidget {
   final IconData profileIcon;
   final VoidCallback deleteIcon;
   final VoidCallback editIcon;
-    final VoidCallback viewIcon;
-
-  
 
   const ProfileList({
     super.key,
@@ -16,7 +13,7 @@ class ProfileList extends StatelessWidget {
     required this.textBranchName,
     required this.profileIcon,
     required this.deleteIcon,
-    required this.editIcon, required this.viewIcon,
+    required this.editIcon,
   });
 
   @override
@@ -34,7 +31,7 @@ class ProfileList extends StatelessWidget {
         color: Colors.grey[200], // Set the background color
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(profileIcon, size: 32), // Use the provided profileIcon
           const SizedBox(width: 10),
@@ -59,16 +56,19 @@ class ProfileList extends StatelessWidget {
               ),
             ],
           ),
+         const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+               SizedBox(width: 5),
+               SizedBox(width: 5),
+            ],
+          ),
+          const Spacer(),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const SizedBox(width: 5),
-              IconButton(
-                icon:
-                    const Icon(Icons.visibility, size: 20, color: Colors.blue),
-                onPressed: viewIcon, // Use the provided editIcon callback
-              ),
-              const SizedBox(width: 5),
+              
               IconButton(
                 icon: const Icon(Icons.edit, size: 20, color: Colors.blue),
                 onPressed: editIcon, // Use the provided editIcon callback

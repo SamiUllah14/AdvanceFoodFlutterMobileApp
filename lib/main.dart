@@ -3,9 +3,17 @@ import 'package:get/get.dart';
 import 'package:owner_project_app/Screens/Chat/ChatEmployeeContacts/chat_employee_contact.dart';
 import 'package:owner_project_app/Screens/Home/home_screen.dart';
 
+import 'Controllers/EmployeePerformance/employee_performance_controller';
+import 'Controllers/Usermanagement/search_controller.dart';
+
 void main() {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensures proper initialization
+  WidgetsFlutterBinding.ensureInitialized(); 
+  // Ensures proper initialization
   runApp(MainApp());
+    Get.put(SearchsController());
+      Get.put(EmployeePerformanceController());
+
+
 }
 
 class MainApp extends StatelessWidget {

@@ -1,0 +1,38 @@
+import 'package:get/get.dart';
+
+class EmployeePerformanceController extends GetxController {
+  final RxList<int> confirmedOrders = [20, 30].obs; // Example confirmed orders
+  final RxList<int> canceledOrders = [10, 15].obs; // Example canceled orders
+
+  // Method to return the combined data (for example purposes)
+  List<int> getData() {
+    return [
+      confirmedOrders.reduce((a, b) => a + b),
+      canceledOrders.reduce((a, b) => a + b)
+    ];
+  }
+
+  // Method to return percentages of confirmed and canceled orders
+  List<double> getPercentages() {
+    final totalConfirmed = confirmedOrders.isNotEmpty
+        ? confirmedOrders.reduce((a, b) => a + b)
+        : 0;
+        
+    final totalCanceled = canceledOrders.isNotEmpty
+        ? canceledOrders.reduce((a, b) => a + b)
+        : 0;
+        
+    final totalOrders = totalConfirmed + totalCanceled;
+
+    // Avoid division by zero
+    if (totalOrders == 0) {
+      return [0.0, 0.0];
+    }
+
+    // Calculate percentages
+    final confirmedPercentage = (totalConfirmed / totalOrders) * 100;
+    final canceledPercentage = (totalCanceled / totalOrders) * 100;
+
+    return [confirmedPercentage, canceledPercentage];
+  }
+}
