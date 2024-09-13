@@ -6,7 +6,8 @@ import 'package:owner_project_app/Screens/UserManagementScreen/user_management_s
 import 'package:owner_project_app/Screens/YourEmployeesScreen/your_employees_screen.dart';
 import 'package:owner_project_app/Widgets/ReusableWidgets/Global/header_text.dart';
 
-import '../EmployeePerformanceScreen/employee_performance_screen.dart';
+import '../EmployeePerformanceScreen/employee_performance.dart';
+import '../EmployeePerformanceScreen/innerScreens/search_employee_screen.dart';
 import 'Data/panel_cont_data.dart';
 
 class HomeScreen extends StatefulWidget {

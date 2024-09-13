@@ -2,15 +2,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
-class SearchsController extends GetxController {
-  var searchResults = <dynamic>[].obs;
+class SearchListPerformanceController extends GetxController {
+  var performanceResults = <dynamic>[].obs;
   var isLoading = false.obs;
 
   final String apiUrl = "http://192.168.1.107:5274/api/Search/owner_search_bar";
 
   Future<void> search(String query) async {
     if (query.isEmpty) {
-      searchResults.clear();
+      performanceResults.clear();
       return;
     }
 
@@ -18,8 +18,8 @@ class SearchsController extends GetxController {
       isLoading.value = true;
       final response = await http.get(Uri.parse("$apiUrl?query=$query"));
 
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      print('API response status: ${response.statusCode}');
+      print('API response body: ${response.body}');
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
@@ -27,11 +27,12 @@ class SearchsController extends GetxController {
 
         final staffMembers = jsonData['staffMembers'] ?? [];
         final managers = jsonData['managers'] ?? [];
-        searchResults.value = [...staffMembers, ...managers];
 
-        print('Updated Search Results: ${searchResults}');
+        // Combine both lists into one for display
+        performanceResults.value = [...staffMembers, ...managers];
       } else {
-        Get.snackbar('Error', 'Failed to fetch search results');
+        Get.snackbar('Error',
+            'Failed to fetch performance results: ${response.reasonPhrase}');
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred while searching: $e');

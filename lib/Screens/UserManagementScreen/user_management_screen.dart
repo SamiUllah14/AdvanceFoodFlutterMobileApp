@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import '../../Controllers/Usermanagement/manager_controller.dart';
 import '../../Controllers/Usermanagement/staff_members_controller.dart';
 import '../../../Widgets/ReusableWidgets/Global/SearchBar/rounded_search_bar.dart';
+import '../../Widgets/ReusableWidgets/Global/ProfileListContainer/profile_list.dart';
 import 'InnerScreens/AddProfileManager/add_manager_profile_screen.dart';
 import 'InnerScreens/AddStaffmembersProfileDetailPage.dart';
 import 'InnerScreens/edit_manager_screen.dart';
 import 'InnerScreens/edit_staff_member_screen.dart';
 import 'InnerScreens/search_screen.dart';
-import 'Widgets/profile_list.dart';
 import 'Widgets/role_and_btn.dart';
 
 class UserManagementScreen extends StatelessWidget {

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 class ProfileList extends StatelessWidget {
   final String textName;
   final String textBranchName;
-  final IconData profileIcon;
-  final VoidCallback deleteIcon;
-  final VoidCallback editIcon;
+  final IconData? profileIcon;
+  final VoidCallback? deleteIcon;
+  final VoidCallback? editIcon;
 
   const ProfileList({
     super.key,
     required this.textName,
     required this.textBranchName,
-    required this.profileIcon,
-    required this.deleteIcon,
-    required this.editIcon,
+     this.profileIcon,
+     this.deleteIcon,
+     this.editIcon,
   });
 
   @override

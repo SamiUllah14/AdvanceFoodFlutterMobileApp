@@ -35,4 +35,9 @@ class EmployeePerformanceController extends GetxController {
 
     return [confirmedPercentage, canceledPercentage];
   }
+
+
+// below is for List of tabs In empoyyee performance
+
+ 
 }

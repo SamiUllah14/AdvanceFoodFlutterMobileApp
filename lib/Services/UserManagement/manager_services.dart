@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../../Models/UserManagement/manager.dart';
 
 class ManagerService {
-  final String baseUrl = 'http://192.168.1.101:5274/api/managers'; // Replace with your actual API base URL
+  final String baseUrl = 'http://192.168.1.107:5274/api/managers'; // Replace with your actual API base URL
 
   // Add a manager
   Future<void> addManager(Manager manager) async {
