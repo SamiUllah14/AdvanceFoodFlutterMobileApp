@@ -18,7 +18,7 @@ class ManagerController extends GetxController {
   Future<void> fetchManagers() async {
     try {
       isLoading.value = true; // Set loading to true
-      final response = await http.get(Uri.parse("http://192.168.1.107:5274/api/managers"));
+      final response = await http.get(Uri.parse("http://192.168.1.108:5274/api/managers"));
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
         managers.value = jsonData.map((json) => Manager.fromJson(json)).toList();
@@ -33,7 +33,7 @@ class ManagerController extends GetxController {
   Future<void> fetchManagerDetails(int id) async {
     try {
       isLoading.value = true; // Set loading to true
-      final response = await http.get(Uri.parse("http://192.168.1.107:5274/api/managers/$id"));
+      final response = await http.get(Uri.parse("http://192.168.1.108:5274/api/managers/$id"));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         selectedManager.value = Manager.fromJson(jsonData);
@@ -49,7 +49,7 @@ class ManagerController extends GetxController {
     try {
       isLoading.value = true; // Set loading to true
       final response = await http.delete(
-        Uri.parse('http://192.168.1.107:5274/api/managers/$id'),
+        Uri.parse('http://192.168.1.108:5274/api/managers/$id'),
       );
 
       if (response.statusCode == 204) {
@@ -69,7 +69,7 @@ class ManagerController extends GetxController {
   try {
     isLoading.value = true;
     final response = await http.put(
-      Uri.parse('http://192.168.1.107:5274/api/managers/$id'),
+      Uri.parse('http://192.168.1.108:5274/api/managers/$id'),
       headers: {"Content-Type": "application/json"},
       body: json.encode(updatedManager.toJson()),
     );

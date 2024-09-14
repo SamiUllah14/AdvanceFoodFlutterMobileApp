@@ -6,7 +6,7 @@ class SearchsController extends GetxController {
   var searchResults = <dynamic>[].obs;
   var isLoading = false.obs;
 
-  final String apiUrl = "http://192.168.1.107:5274/api/Search/owner_search_bar";
+  final String apiUrl = "http://192.168.1.108:5274/api/Search/owner_search_bar";
 
   Future<void> search(String query) async {
     if (query.isEmpty) {

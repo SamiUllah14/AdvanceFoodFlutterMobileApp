@@ -2,12 +2,8 @@
 // For demonstration, it's included here.
 const List<Map<String, String>> panelData = [
   {
-    'imagePath': 'Assets/Images/HomeOwnerPanel/Employee.svg',
-    'text': 'Your Employees',
-  },
-  {
     'imagePath': 'Assets/Images/HomeOwnerPanel/FinancialManagerment.svg',
-    'text': 'Financial Management',
+    'text': 'Financial Analysis',
   },
   {
     'imagePath': 'Assets/Images/HomeOwnerPanel/UserManagement.svg',
@@ -15,11 +11,11 @@ const List<Map<String, String>> panelData = [
   },
   {
     'imagePath': 'Assets/Images/HomeOwnerPanel/FranchaiseManagement.svg',
-    'text': 'Franchise Management',
+    'text': 'Franchisee',
   },
   {
     'imagePath': 'Assets/Images/HomeOwnerPanel/EmployeePerformance.svg',
-    'text': 'Employee Performance',
+    'text': 'Employee Data',
   },
   {
     'imagePath': 'Assets/Images/HomeOwnerPanel/FranchaiseManagement.svg',

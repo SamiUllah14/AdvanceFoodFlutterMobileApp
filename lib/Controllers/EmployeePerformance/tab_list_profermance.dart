@@ -21,7 +21,7 @@ class TabListPerformanceController extends GetxController {
     try {
       isLoading.value = true; // Set loading to true
       errorMessage.value = ''; // Clear previous error message
-      final response = await http.get(Uri.parse("http://192.168.1.107:5274/api/managers"));
+      final response = await http.get(Uri.parse("http://192.168.1.108:5274/api/managers"));
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
         TabListPerformanceManagers.value =
@@ -41,7 +41,7 @@ class TabListPerformanceController extends GetxController {
     try {
       isLoading.value = true; // Set loading to true
       errorMessage.value = ''; // Clear previous error message
-      final response = await http.get(Uri.parse("http://192.168.1.107:5274/api/staffmembers"));
+      final response = await http.get(Uri.parse("http://192.168.1.108:5274/api/staffmembers"));
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
         TabListPerformanceEmployees.value =

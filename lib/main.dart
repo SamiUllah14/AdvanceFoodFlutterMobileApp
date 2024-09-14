@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:owner_project_app/Controllers/LoginAndRegister/login_and_register_controller.dart';
 import 'package:owner_project_app/Screens/Chat/ChatEmployeeContacts/chat_employee_contact.dart';
 import 'package:owner_project_app/Screens/Home/home_screen.dart';
-
 import 'Controllers/EmployeePerformance/employee_performance_controller';
 import 'Controllers/EmployeePerformance/search_list_performance_controller.dart';
 import 'Controllers/EmployeePerformance/tab_list_profermance.dart';
 import 'Controllers/Usermanagement/search_controller.dart';
+import 'Screens/SplashScreen/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Ensures proper initialization
-  runApp(MainApp());
+  Get.put(LoginAndRegisterController());
   Get.put(SearchsController());
   Get.put(EmployeePerformanceController());
   Get.put(TabListPerformanceController());
   Get.put(SearchListPerformanceController());
+  
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -24,14 +27,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      themeMode:
-          ThemeMode.system, // Automatically switch between light and dark modes
-      home: MainPage(), // The main page with BottomNavigationBar
+      themeMode: ThemeMode.system, // Automatically switch between light and dark modes
+      home: SplashScreen(), // Start with SplashScreen
     );
   }
 }
-
-// Controller for managing the bottom navigation bar
 class MainController extends GetxController {
   var selectedIndex = 0.obs; // Observed variable to track selected index
 
@@ -51,12 +51,10 @@ class MainController extends GetxController {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final MainController controller =
-        Get.put(MainController()); // Initialize controller
+    final MainController controller = Get.put(MainController()); // Initialize controller
 
     return Scaffold(
-      body: Obx(() => controller
-          .pages[controller.selectedIndex.value]), // Observe the selected index
+      body: Obx(() => controller.pages[controller.selectedIndex.value]), // Observe the selected index
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changePage, // Change page on tap

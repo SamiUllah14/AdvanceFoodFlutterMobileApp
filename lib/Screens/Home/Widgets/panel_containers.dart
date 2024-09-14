@@ -42,7 +42,7 @@ class PanelContainer extends StatelessWidget {
                 width: screenWidth *
                     (widthFactor + 0.1), // Slightly larger image width
                 height: screenWidth *
-                    (heightFactor - 0.15), // Slightly smaller image height
+                    (heightFactor - 0.19), // Slightly smaller image height
               ),
               Text(
                 text,

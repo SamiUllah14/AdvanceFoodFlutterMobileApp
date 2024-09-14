@@ -6,7 +6,7 @@ import '../../Widgets/ReusableWidgets/Global/CustomCircularGraph/custom_circular
 import '../../Widgets/ReusableWidgets/Global/SearchBar/rounded_search_bar.dart';
 import 'Widgets/performance_profile_list_containers.dart';
 import 'innerScreens/search_employee_screen.dart';
-  
+
 class EmployeePerformanceScreen extends StatefulWidget {
   @override
   _EmployeePerformanceScreenState createState() =>
@@ -62,40 +62,39 @@ class _EmployeePerformanceScreenState extends State<EmployeePerformanceScreen>
               ),
               const SizedBox(height: 30),
               const Text("All Monthly Employee Performance"),
-
               Obx(() {
                 final percentages = employeeController.getPercentages();
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) => Expanded(
-                    child: CustomCircularGraph(
-                      data: percentages,
-                      colors: const [Colors.green, Colors.red],
-                      titles: const ['Confirmed', 'Canceled'],
-                    ),
-                  )),
+                  children: List.generate(
+                      3,
+                      (index) => Expanded(
+                            child: CustomCircularGraph(
+                              data: percentages,
+                              colors: const [Colors.green, Colors.red],
+                              titles: const ['Confirmed', 'Canceled'],
+                            ),
+                          )),
                 );
               }),
-
               const SizedBox(height: 30),
               const Text("Managers Performance"),
-
               Obx(() {
                 final percentages = employeeController.getPercentages();
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) => Expanded(
-                    child: CustomCircularGraph(
-                      data: percentages,
-                      colors: const [Colors.green, Colors.red],
-                      titles: const ['Confirmed', 'Canceled'],
-                    ),
-                  )),
+                  children: List.generate(
+                      3,
+                      (index) => Expanded(
+                            child: CustomCircularGraph(
+                              data: percentages,
+                              colors: const [Colors.green, Colors.red],
+                              titles: const ['Confirmed', 'Canceled'],
+                            ),
+                          )),
                 );
               }),
-
               const SizedBox(height: 20),
-
               TabBar(
                 controller: _tabController,
                 labelColor: Colors.black,
@@ -114,13 +113,17 @@ class _EmployeePerformanceScreenState extends State<EmployeePerformanceScreen>
                     Obx(() {
                       if (tabController.isLoading.value) {
                         return const Center(child: CircularProgressIndicator());
-                      } else if (tabController.TabListPerformanceEmployees.isEmpty) {
-                        return const Center(child: Text('Failed to load employees.'));
+                      } else if (tabController
+                          .TabListPerformanceEmployees.isEmpty) {
+                        return const Center(
+                            child: Text('Failed to load employees.'));
                       } else {
                         return ListView.builder(
-                          itemCount: tabController.TabListPerformanceEmployees.length,
+                          itemCount:
+                              tabController.TabListPerformanceEmployees.length,
                           itemBuilder: (context, index) {
-                            final employee = tabController.TabListPerformanceEmployees[index];
+                            final employee = tabController
+                                .TabListPerformanceEmployees[index];
                             return PerformanceProfileListContainers(
                               headtext: employee.name,
                               descriptionText: employee.role,
@@ -132,13 +135,17 @@ class _EmployeePerformanceScreenState extends State<EmployeePerformanceScreen>
                     Obx(() {
                       if (tabController.isLoading.value) {
                         return const Center(child: CircularProgressIndicator());
-                      } else if (tabController.TabListPerformanceManagers.isEmpty) {
-                        return const Center(child: Text('Failed to load managers.'));
+                      } else if (tabController
+                          .TabListPerformanceManagers.isEmpty) {
+                        return const Center(
+                            child: Text('Failed to load managers.'));
                       } else {
                         return ListView.builder(
-                          itemCount: tabController.TabListPerformanceManagers.length,
+                          itemCount:
+                              tabController.TabListPerformanceManagers.length,
                           itemBuilder: (context, index) {
-                            final manager = tabController.TabListPerformanceManagers[index];
+                            final manager =
+                                tabController.TabListPerformanceManagers[index];
                             return PerformanceProfileListContainers(
                               headtext: manager.name,
                               descriptionText: manager.role,

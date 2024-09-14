@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:owner_project_app/Screens/FinancialManagementScreen/financial_management_screen.dart';
 import 'package:owner_project_app/Screens/FranchiseManagementScreen/franchise_management_screen.dart';
 import 'package:owner_project_app/Screens/Home/Widgets/panel_containers.dart';
 import 'package:owner_project_app/Screens/UserManagementScreen/user_management_screen.dart';
-import 'package:owner_project_app/Screens/YourEmployeesScreen/your_employees_screen.dart';
 import 'package:owner_project_app/Widgets/ReusableWidgets/Global/header_text.dart';
 
+import '../../Controllers/LoginAndRegister/login_and_register_controller.dart';
 import '../EmployeePerformanceScreen/employee_performance.dart';
-import '../EmployeePerformanceScreen/innerScreens/search_employee_screen.dart';
 import 'Data/panel_cont_data.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+    final LoginAndRegisterController loginController = Get.find();
+
   final List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -79,35 +81,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => YourEmployeesScreen()),
+                                  builder: (context) => const FinancialManagementScreen()),
                             );
                             break;
                           case 1:
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => FinancialManagementScreen()),
+                                  builder: (context) => UserManagementScreen()),
                             );
                             break;
                              case 2:
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => UserManagementScreen()),
+                                  builder: (context) => const FranchiseManagementScreen()),
                             );
                             break; case 3:
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FranchiseManagementScreen()),
-                            );
-                            break; case 4:
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => EmployeePerformanceScreen()),
                             );
                             break;
+                             
                           // Add more cases for other panels
                         }
                       },
@@ -117,7 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
+
               ),
+              ElevatedButton(
+          onPressed: () async {
+            await loginController.logoutUser();
+          },
+          child: Text('Logout Account'),
+        ),
             ],
           ),
         ),

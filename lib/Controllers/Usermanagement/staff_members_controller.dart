@@ -18,7 +18,7 @@ class StaffMemberController extends GetxController {
   Future<void> fetchStaffMembers() async {
     try {
       isLoading.value = true; // Set loading to true
-      final response = await http.get(Uri.parse("http://192.168.1.107:5274/api/staffmembers"));
+      final response = await http.get(Uri.parse("http://192.168.1.108:5274/api/staffmembers"));
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
         staffMembers.value = jsonData.map((json) => StaffMember.fromJson(json)).toList();
@@ -33,7 +33,7 @@ class StaffMemberController extends GetxController {
   Future<void> fetchStaffMemberDetails(int id) async {
     try {
       isLoading.value = true; // Set loading to true
-      final response = await http.get(Uri.parse("http://192.168.1.107:5274/api/staffmembers/$id"));
+      final response = await http.get(Uri.parse("http://192.168.1.108:5274/api/staffmembers/$id"));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         selectedStaffMember.value = StaffMember.fromJson(jsonData);
@@ -49,7 +49,7 @@ class StaffMemberController extends GetxController {
     try {
       isLoading.value = true; // Set loading to true
       final response = await http.delete(
-        Uri.parse('http://192.168.1.107:5274/api/staffmembers/$id'),
+        Uri.parse('http://192.168.1.108:5274/api/staffmembers/$id'),
       );
 
       if (response.statusCode == 204) {
@@ -69,7 +69,7 @@ class StaffMemberController extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.put(
-        Uri.parse('http://192.168.1.107:5274/api/staffmembers/$id'),
+        Uri.parse('http://192.168.1.108:5274/api/staffmembers/$id'),
         headers: {"Content-Type": "application/json"},
         body: json.encode(updatedStaffMember.toJson()),
       );
@@ -94,7 +94,7 @@ class StaffMemberController extends GetxController {
   try {
     isLoading.value = true;
     final response = await http.post(
-      Uri.parse('http://192.168.1.107:5274/api/staffmembers'),
+      Uri.parse('http://192.168.1.108:5274/api/staffmembers'),
       headers: {"Content-Type": "application/json"},
       body: json.encode(newStaffMember.toJson()),
     );
