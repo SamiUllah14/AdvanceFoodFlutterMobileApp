@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:owner_project_app/Widgets/ReusableWidgets/Global/ReusableTextField/reusable_textfield.dart';
 import '../../../../Models/UserManagement/manager.dart';
 import '../../../../Services/UserManagement/manager_services.dart';
@@ -20,6 +21,9 @@ class _AddManagerProfileDetailPageState
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ManagerService _managerService = ManagerService();
+
+  // State to manage password visibility
+  final RxBool isPasswordVisible = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +114,20 @@ class _AddManagerProfileDetailPageState
                   labelText: "Password",
                   hintText: "Enter password for manager",
                   controller: passwordController,
-                  icon: Icons.visibility,
-                  isObscureText: true,
+                  icon: Icons.lock,
+                  isObscureText: !isPasswordVisible.value,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      isPasswordVisible.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isPasswordVisible.value = !isPasswordVisible.value;
+                      });
+                    },
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a password';
@@ -120,7 +136,7 @@ class _AddManagerProfileDetailPageState
                       return 'Password must be at least 6 characters long';
                     }
                     if (!RegExp(r'(?=.*[A-Z])(?=.*\d)').hasMatch(value)) {
-                      return 'Enter uppercase letter and one number';
+                      return 'Password must include an uppercase letter and a number';
                     }
                     return null;
                   },
@@ -137,7 +153,8 @@ class _AddManagerProfileDetailPageState
                           name: nameController.text,
                           role: roleController.text,
                           email: emailController.text,
-                          password: passwordController.text, id: null,
+                          password: passwordController.text, 
+                          id: null,
                         );
 
                         try {

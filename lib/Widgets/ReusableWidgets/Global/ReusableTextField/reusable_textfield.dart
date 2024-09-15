@@ -8,7 +8,7 @@ class ReusableTextField extends StatelessWidget {
   final bool isObscureText; // Whether the text field should obscure input
   final TextInputType keyboardType; // Type of keyboard for the field (e.g., email, phone)
   final Function(String)? onChanged; // Callback for text changes
-  final VoidCallback? onIconPressed; // Optional callback for icon button press
+  final IconButton? suffixIcon; // Optional icon button
   final IconData icon; // Icon to display
   final String? Function(String?)? validator; // Validator function
 
@@ -20,9 +20,9 @@ class ReusableTextField extends StatelessWidget {
     this.isObscureText = false,
     this.keyboardType = TextInputType.text,
     this.onChanged,
-    this.onIconPressed, // Optional icon button press callback
-    this.icon = Icons.visibility, // Default icon
-    this.validator, // Validator function
+    this.suffixIcon, // Optional icon button
+    this.icon = Icons.visibility, // Default icon (can be overridden)
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -51,6 +51,7 @@ class ReusableTextField extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12), // Padding
                     hintText: hintText, // Placeholder text
+                    suffixIcon: suffixIcon, // Add suffix icon if provided
                   ),
                   controller: controller,
                   obscureText: isObscureText, // Optionally hide text
@@ -58,10 +59,6 @@ class ReusableTextField extends StatelessWidget {
                   onChanged: onChanged, // Handle text changes
                   validator: validator, // Validate the input
                 ),
-              ),
-              IconButton(
-                icon: Icon(icon), // Display the specified icon
-                onPressed: onIconPressed, // Handle icon press
               ),
             ],
           ),

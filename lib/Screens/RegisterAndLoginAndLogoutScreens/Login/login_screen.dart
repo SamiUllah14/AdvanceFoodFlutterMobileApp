@@ -20,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // Key for form validation
+  final RxBool isPasswordVisible = false.obs; // Observable for password visibility
   bool _isChecked = false;
 
   @override
@@ -45,123 +47,150 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: EdgeInsets.symmetric(
                     horizontal: screenWidth * 0.04,
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: screenHeight * 0.4,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: screenHeight * 0.05),
-                          child: Center(
-                            child: Image.asset(
-                              imagePath,
-                              fit: BoxFit.cover,
+                  child: Form(
+                    key: _formKey, // Add Form widget
+                    child: Column(
+                      children: [
+                        Container(
+                          height: screenHeight * 0.4,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: screenHeight * 0.05),
+                            child: Center(
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const HeaderText(text: "Login"),
-                            SizedBox(height: screenHeight * 0.01),
-                            const BodyText(
-                              text: 'Please Sign in to continue.',
-                              color: Colors.blue,
-                            ),
-                            SizedBox(height: screenHeight * 0.02),
-                            TextField(
-                              controller: usernameController,
-                              decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.person),
-                                hintText: 'Username',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                        Container(
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const HeaderText(text: "Login"),
+                              SizedBox(height: screenHeight * 0.01),
+                              const BodyText(
+                                text: 'Please Sign in to continue.',
+                                color: Colors.blue,
                               ),
-                            ),
-                            SizedBox(height: screenHeight * 0.02),
-                            TextField(
-                              controller: passwordController,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.lock),
-                                suffixIcon: const Icon(Icons.visibility),
-                                hintText: 'Password',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: screenHeight * 0.02),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const BodyText(text: "Remind me next time"),
-                                Checkbox(
-                                  value: _isChecked,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      _isChecked = value!;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: screenHeight * 0.01),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                LoginRegisterButton(
-                                  text: "Sign In",
-                                  onPressed: () async {
-                                    final loginDto = LoginDto(
-                                      username: usernameController.text,
-                                      password: passwordController.text,
-                                    );
-                                    
-                                    bool success = await controller.loginUser(loginDto);
-                                    
-                                    if (success) {
-                                      if (_isChecked) {
-                                        controller.saveCredentials(loginDto.username, loginDto.password); // Save credentials if checkbox is checked
-                                      }
-                                      Get.offAll(() => const HomeScreen());
-                                    } else {
-                                      // Handle login failure
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: screenHeight * 0.02),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Don't have an account?",
-                                  style: TextStyle(fontSize: 14.0),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Get.to(() => RegisterScreen());
-                                  },
-                                  child: const Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                              SizedBox(height: screenHeight * 0.02),
+                              TextFormField(
+                                controller: usernameController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.person),
+                                  hintText: 'Username',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your username';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: screenHeight * 0.02),
+                              Obx(() => TextFormField(
+                                controller: passwordController,
+                                obscureText: !isPasswordVisible.value,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.lock),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      isPasswordVisible.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                    onPressed: () {
+                                      // Toggle the password visibility
+                                      isPasswordVisible.value = !isPasswordVisible.value;
+                                    },
+                                  ),
+                                  hintText: 'Password',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  return null;
+                                },
+                              )),
+                              SizedBox(height: screenHeight * 0.02),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const BodyText(text: "Remind me next time"),
+                                  Checkbox(
+                                    value: _isChecked,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        _isChecked = value!;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: screenHeight * 0.01),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  LoginRegisterButton(
+                                    text: "Sign In",
+                                    onPressed: () async {
+                                      if (_formKey.currentState?.validate() ?? false) {
+                                        final loginDto = LoginDto(
+                                          username: usernameController.text,
+                                          password: passwordController.text,
+                                        );
+                                        
+                                        bool success = await controller.loginUser(loginDto);
+                                        
+                                        if (success) {
+                                          if (_isChecked) {
+                                            controller.saveCredentials(loginDto.username, loginDto.password); // Save credentials if checkbox is checked
+                                          }
+                                          Get.offAll(() => const HomeScreen());
+                                        } else {
+                                          // Handle login failure
+                                        }
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: screenHeight * 0.02),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Don't have an account?",
+                                    style: TextStyle(fontSize: 14.0),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.to(() => RegisterScreen());
+                                    },
+                                    child: const Text(
+                                      'Sign Up',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
