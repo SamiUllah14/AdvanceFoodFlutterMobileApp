@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'Screens/Attendance/attendance_screen.dart';
+import 'Screens/SplashScreen/splash_screen.dart';
+import 'Screens/NotificationsScreen/notifications_screen.dart';
+import 'Screens/Orders/order_screen.dart';
+import 'Screens/SettingScreen/setting_screen.dart';
+import 'Screens/Chat/chat_screen.dart';
+import 'Screens/StaffManagement /staff_management_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,119 +16,102 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return GetMaterialApp(
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.light,
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const SplashScreen()),
+        GetPage(
+            name: '/SettingScreen',
+            page: () => const SettingScreen()), // StaffManagementScreen
+        GetPage(
+            name: '/AttendanceScreen',
+            page: () =>
+                const AttendanceScreen()), // Ensure this is registered correctly
+        GetPage(name: '/OrderScreen', page: () => const OrderScreen()),
+        GetPage(
+            name: '/StaffManagementScreen',
+            page: () =>  StaffManagementScreen()),
+
+        GetPage(name: '/ChatScreen', page: () => const ChatScreen()),
+        GetPage(
+            name: '/NotificationsScreen',
+            page: () => const NotificationsScreen()),
+      ],
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+// below is theme
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+// Define light and dark themes here
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+final ThemeData lightTheme = ThemeData(
+  primaryColor: const Color.fromARGB(255, 28, 73, 197), // Elegant Blue
+  secondaryHeaderColor: const Color(0xFFFFFFFF), // White for Light Mode
 
-  final String title;
+  highlightColor: const Color(0xFF000000), // Black for Light Mode
+  hintColor: const Color(0xFF9EB2F0), // Soft Blue
+  buttonTheme: const ButtonThemeData(
+    buttonColor: Color(0xFFB3C6F7), // Light Blue
+    textTheme: ButtonTextTheme.primary,
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+    hintStyle: TextStyle(color: Colors.grey),
+  ),
+  scaffoldBackgroundColor: Colors.white,
+  appBarTheme: const AppBarTheme(
+    color: Color(0xFF1E3A8A), // Elegant Blue
+  ),
+  textTheme: const TextTheme(
+    displayLarge: TextStyle(
+      fontSize: 35.7,
+      fontWeight: FontWeight.bold,
+      color: Color(0xFF1c2120), // Dark text for readability
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 12,
+      color: Color(0xFF8f8e8e), // Light grey for body text
+    ),
+  ),
+);
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
+final ThemeData darkTheme = ThemeData(
+  primaryColor: const Color(0xFF1E3A8A), // Elegant Blue
+  secondaryHeaderColor: const Color(0xFF1c2120), // Dark Grey for Dark Mode
+  highlightColor: const Color(0xFFF1F5F9), // Light Grey for Dark Mode
+  hintColor: const Color(0xFF6D9AC8), // Muted Blue
+  buttonTheme: const ButtonThemeData(
+    buttonColor: Color(0xFF2B4C8F), // Darker Blue
+    textTheme: ButtonTextTheme.primary,
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+    hintStyle: TextStyle(color: Colors.grey),
+  ),
+  scaffoldBackgroundColor:
+      const Color(0xFF121212), // Dark background for night mode
+  appBarTheme: const AppBarTheme(
+    color: Color(0xFF1E3A8A), // Elegant Blue
+  ),
+  textTheme: const TextTheme(
+    displayLarge: TextStyle(
+      fontSize: 35.7,
+      fontWeight: FontWeight.bold,
+      color: Colors.white, // White text for readability in dark mode
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 12,
+      color: Colors.grey, // Grey text for body text in dark mode
+    ),
+  ),
+);
